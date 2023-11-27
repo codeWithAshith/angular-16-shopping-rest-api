@@ -1,0 +1,57 @@
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-6">
+        <ng-lottie [options]="options"></ng-lottie>
+      </div>
+      <div class="col-6">
+        <h2 class="display-4 text-primary">Register</h2>
+        <form>
+          <!-- Username input -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input type="text" id="username" class="form-control" />
+            <div class="error">Error</div>
+          </div>
+
+          <!-- Name input -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="name">Name</label>
+            <input type="text" id="name" class="form-control" />
+            <div class="error">Error</div>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" class="form-control" />
+            <div class="error">Error</div>
+          </div>
+
+          <!-- Confirm Password input -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="confirmPassword"
+              >Confirm Password</label
+            >
+            <input type="password" id="confirmPassword" class="form-control" />
+            <div class="error">Error</div>
+          </div>
+
+          <div class="d-flex align-items-center mb-4">
+            <span>Already registered?</span>
+            <a
+              routerLink="/login"
+              class="text-primary text-decoration-none px-2"
+              >Login here</a
+            >
+          </div>
+
+          <!-- Submit button -->
+          <div class="d-grid gap-2 mb-5">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

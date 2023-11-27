@@ -1,0 +1,222 @@
+<div class="row m-2 my-4">
+  <div class="d-flex justify-content-between">
+    <p class="fs-3 mb-0">Books</p>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#productModal"
+    >
+      Add Book
+    </button>
+    <div
+      class="modal fade"
+      id="productModal"
+      tabindex="-1"
+      aria-labelledby="productModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="productModalLabel">Add Book</h1>
+          </div>
+          <div class="modal-body">
+            <form
+              class="row"
+              (ngSubmit)="addBook(productForm)"
+              #productForm="ngForm"
+              novalidate
+            >
+              <!-- Select Basic -->
+              <div class="form-group">
+                <label class="control-label mb-2" for="categoryId"
+                  >Category</label
+                >
+                <div class="mb-2">
+                  <select
+                    id="categoryId"
+                    name="categoryId"
+                    class="form-control"
+                    ngModel
+                    required
+                  >
+                    <option
+                      *ngFor="let category of categories"
+                      [value]="category.id"
+                    >
+                      {{ category.title }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="
+                      productForm.controls['categoryId']?.invalid &&
+                      (productForm.controls['categoryId']?.dirty ||
+                        productForm.controls['categoryId']?.touched)
+                    "
+                    class="text-danger"
+                  >
+                    Please select a category.
+                  </div>
+                </div>
+              </div>
+              <!-- Text input-->
+              <div class="form-group mb-2">
+                <label class="control-label mb-2" for="title"
+                  >Name</label
+                >
+                <div class="">
+                  <input
+                    id="title"
+                    name="title"
+                    placeholder="Name"
+                    class="form-control input-md"
+                    type="text"
+                    ngModel
+                    required
+                  />
+                  <div
+                    *ngIf="
+                      productForm.controls['title']?.invalid &&
+                      (productForm.controls['title']?.dirty ||
+                        productForm.controls['title']?.touched)
+                    "
+                    class="text-danger"
+                  >
+                    Please enter a name.
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mb-2">
+                <label class="control-label mb-2" for="author">Author</label>
+                <div class="">
+                  <input
+                    id="author"
+                    name="author"
+                    placeholder="Author"
+                    class="form-control input-md"
+                    type="text"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group mb-2">
+                <label class="control-label mb-2" for="product_name_fr"
+                  >Description
+                </label>
+                <div class="mb-2">
+                  <textarea
+                    id="product_name_fr"
+                    name="description"
+                    placeholder="Description"
+                    class="form-control input-md"
+                    type="text"
+                    rows="5"
+                    ngModel
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Text input-->
+              <div class="form-group mb-2">
+                <label class="control-label mb-2" for="percentage_discount"
+                  >Price</label
+                >
+                <div class="mb-2">
+                  <input
+                    id="price"
+                    name="price"
+                    placeholder="Price"
+                    class="form-control input-md"
+                    type="text"
+                    ngModel
+                  />
+                </div>
+              </div>
+
+              <!-- File input-->
+              <div class="form-group mb-2">
+                <label class="control-label mb-2" for="filebutton">Image</label>
+                <div class="col-6">
+                  <input
+                    id="filebutton"
+                    name="image"
+                    class="input-file"
+                    type="file"
+                    ngModel
+                    (change)="onFileChange($event)" 
+                  />
+                  <div
+                    *ngIf="
+                      productForm.controls['image']?.invalid &&
+                      (productForm.controls['image']?.dirty ||
+                        productForm.controls['image']?.touched)
+                    "
+                    class="text-danger"
+                  >
+                    Please select an image.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Button -->
+              <div class="form-group d-flex justify-content-end gap-2">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  id="add"
+                  name="add"
+                  class="btn btn-primary"
+                  [disabled]="productForm.invalid"
+                >
+                  Add Product
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-dark table-hover table-striped my-4">
+    <thead>
+      <tr class="">
+        <th scope="col" class="fw-semibold">Id</th>
+        <th scope="col" class="fw-semibold w-25">Title</th>
+        <th scope="col" class="fw-semibold">Author</th>
+        <th scope="col" class="fw-semibold w-25">Description</th>
+        <th scope="col" class="fw-semibold">Price</th>
+        <th scope="col" class="fw-semibold"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <th scope="row">{{ product.id }}</th>
+        <td class="">{{ product.title }}</td>
+        <td class="">{{ product.author }}</td>
+        <td class="">{{ product.description }}</td>
+        <td class="">Rs.{{ product.price }}</td>
+        <td>
+          <button
+            class="btn btn-secondary btn-sm mx-2"
+            (click)="onEdit(product)"
+          >
+            Edit</button
+          ><button class="btn btn-danger btn-sm" (click)="onDelete(product.id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

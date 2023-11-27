@@ -1,0 +1,32 @@
+<div class="row m-2 my-4">
+  <p class="fs-4">Category</p>
+  <form
+    #categoryForm="ngForm"
+    (ngSubmit)="onSubmit(categoryForm)"
+    novalidate
+    class="d-flex mb-4"
+  >
+    <input type="hidden" name="id" [(ngModel)]="categoryModel.id" />
+    <div class="me-3 flex-grow-1">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Category"
+        name="title"
+        [(ngModel)]="categoryModel.title"
+      />
+    </div>
+    <div class="me-3">
+      <button class="btn btn-primary">
+        {{ categoryModel.id ? "Edit" : "Add" }}
+      </button>
+    </div>
+  </form>
+
+  <p class="fs-5 mb-4">All Categories</p>
+  <app-categories-table
+    [categories]="categories"
+    (editEmitter)="getCategory($event)"
+    (deleteEmitter)="onDelete($event)"
+  />
+</div>

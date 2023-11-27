@@ -1,0 +1,25 @@
+<table class="table table-dark table-hover  table-striped">
+  <thead>
+    <tr class="">
+      <th scope="col" class="fw-semibold">Id</th>
+      <th scope="col" class="fw-semibold w-75">Title</th>
+      <th scope="col" class="fw-semibold"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <th scope="row">{{ category.id }}</th>
+      <td class="w-50">{{ category.title }}</td>
+      <td>
+        <button
+          class="btn btn-secondary btn-sm mx-2"
+          (click)="onEdit(category)"
+        >
+          Edit</button
+        ><button class="btn btn-danger btn-sm" (click)="onDelete(category.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
